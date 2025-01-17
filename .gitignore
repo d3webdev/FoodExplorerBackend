@@ -1,0 +1,9 @@
+node_modules
+eslint.config.mjs
+package-lock.json
+tmp/uploads/*
+src/database/database.db
+
+.env
+.prettierrc
+.editorconfig
