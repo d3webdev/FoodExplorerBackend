@@ -33,7 +33,7 @@ class PaymentController {
             repositories.orderRepository
         );
 
-        await paymentUpdateService.execute(
+        const response = await paymentUpdateService.execute(
             user_id,
             role,
             id,
@@ -43,7 +43,7 @@ class PaymentController {
             payment_value
         );
 
-        return res.status(200).json('Payment updated successfully');
+        return res.status(200).json(response);
     }
 
     async delete(req, res) {

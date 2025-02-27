@@ -43,13 +43,7 @@ class OrderRepositories {
                     id: uuidv4(),
                     user_id: user_id,
                 })
-                .returning([
-                    'id',
-                    'amount',
-                    'status',
-                    'created_at',
-                    'updated_at',
-                ])
+                .returning('*')
                 .then((rows) => rows[0]);
             return order;
         } catch (error) {

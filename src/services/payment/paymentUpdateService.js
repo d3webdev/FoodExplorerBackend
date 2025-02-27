@@ -60,6 +60,23 @@ class PaymentUpdateService {
             );
         }
 
+        if (status === 'paid') {
+            await this.orderRepository.update({
+                id: order.id,
+                status: 'completed',
+                updated_at: this.timeNow,
+            });
+            payment_date = this.timeNow;
+        }
+
+        if (status === 'canceled') {
+            await this.orderRepository.update({
+                id: order.id,
+                status: 'canceled',
+                updated_at: this.timeNow,
+            });
+        }
+
         const updateData = {
             id,
             updated_at: this.timeNow,

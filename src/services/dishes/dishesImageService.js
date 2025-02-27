@@ -19,9 +19,9 @@ class DishesImageService {
         const dish_image = await this.diskStorage.save(filename);
         dish.image = dish_image;
 
-        await this.dishesRepository.update(dish);
+        const response = await this.dishesRepository.update(dish);
 
-        return dish;
+        return response;
     }
 }
 

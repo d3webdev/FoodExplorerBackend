@@ -15,7 +15,7 @@ class DishesController {
         const { name, description, price, discount, category, ingredients } =
             req.body;
 
-        await dishesCreateService.execute({
+        const response = await dishesCreateService.execute({
             name,
             description,
             price,
@@ -24,7 +24,7 @@ class DishesController {
             ingredients,
         });
 
-        return res.status(201).json('Dish created successfully');
+        return res.status(201).json(response);
     }
 
     async delete(req, res) {
@@ -68,7 +68,7 @@ class DishesController {
             ingredients,
         } = req.body;
 
-        await dishUpdateService.execute({
+        const response = await dishUpdateService.execute({
             id,
             name,
             description,
@@ -79,15 +79,16 @@ class DishesController {
             ingredients,
         });
 
-        return res.status(200).json('Dish updated successfully');
+        return res.status(200).json(response);
     }
 
     async index(req, res) {
+        const { id: user_id } = req.user;
         const dishesListService = new DishesListService(
             repositores.dishRepository
         );
 
-        const response = await dishesListService.execute();
+        const response = await dishesListService.execute(user_id);
 
         return res.status(200).json(response);
     }

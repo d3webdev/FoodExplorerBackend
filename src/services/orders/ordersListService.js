@@ -1,4 +1,4 @@
-const AppError = require('../../utils/AppError');
+// const AppError = require('../../utils/AppError');
 
 class OrdersListService {
     constructor(ordersRepository) {
@@ -13,9 +13,9 @@ class OrdersListService {
             response = await this.ordersRepository.indexAll();
         }
 
-        if (response.length === 0) {
-            throw new AppError('Orders not found', 404);
-        }
+        // if (response.length === 0) {
+        //     throw new AppError('Orders not found', 201);
+        // }
 
         return response;
     }

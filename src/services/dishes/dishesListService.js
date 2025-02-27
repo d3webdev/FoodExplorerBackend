@@ -3,8 +3,8 @@ class DishesListService {
         this.dishesRepository = dishesRepository;
     }
 
-    async execute() {
-        const dishes = await this.dishesRepository.index();
+    async execute(user_id) {
+        const dishes = await this.dishesRepository.index(user_id);
         return dishes;
     }
 }

@@ -2,6 +2,7 @@ require('express-async-errors');
 require('dotenv').config();
 
 const AppError = require('./utils/AppError');
+const cors = require('cors');
 const express = require('express');
 const uploadConfig = require('./configs/upload');
 const routes = require('./routes');
@@ -9,6 +10,15 @@ const routes = require('./routes');
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+app.use(
+    cors({
+        origin: ['http://localhost:3001', 'http://127.0.0.1:3001'],
+        credentials: true,
+        preflightContinue: false,
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    })
+);
 app.use(express.json());
 app.use('/image', express.static(uploadConfig.UPLOAD_FOLDER));
 app.use(routes);

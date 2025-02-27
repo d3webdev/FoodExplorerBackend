@@ -19,15 +19,22 @@ class PaymentCreateService {
         const orderItens =
             await this.paymentRepository.findPaymentsPending(order_id);
 
-        const amount =
-            parseFloat(payment_value) +
-            parseFloat(
-                orderItens
-                    .reduce((acc, item) => {
-                        return acc + item.payment_value;
-                    }, 0)
-                    .toFixed(2)
-            );
+        if (orderItens.length === 1) {
+            const response = await this.paymentRepository.update({
+                id: orderItens[0].id,
+                payment_value: payment_value,
+            });
+
+            return response;
+        }
+
+        const amount = parseFloat(
+            orderItens
+                .reduce((acc, item) => {
+                    return acc + item.payment_value;
+                }, 0)
+                .toFixed(2)
+        );
 
         if (amount > order.amount) {
             throw new AppError(

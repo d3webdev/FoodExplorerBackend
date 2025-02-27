@@ -84,7 +84,11 @@ class DishRepositories {
 
             delete updateData.ingredients;
 
-            await knex('dishes').where('id', updateData.id).update(updateData);
+            const response = await knex('dishes')
+                .where('id', updateData.id)
+                .update(updateData)
+                .returning('*');
+            return response;
         } catch (error) {
             throw new Error(error, 500);
         }
@@ -116,21 +120,28 @@ class DishRepositories {
 
             await knex('dish_ingredients').insert(dishIngredients);
 
-            return { id: dishId };
+            return { dish_id: dishId };
         } catch (error) {
             throw new Error(error, 500);
         }
     }
 
-    async index() {
+    async index(user_id) {
         try {
             const dishes = await knex('dishes').select('*');
 
-            let allDishes = await Promise.allSettled(
+            const allDishes = await Promise.all(
                 dishes.map(async (dish) => {
                     const ingredients = await knex('dish_ingredients')
                         .select('id', 'name')
                         .where('dish_id', dish.id);
+                    const favorites = await knex('dish_favorites')
+                        .select('user_id')
+                        .where('dish_id', dish.id)
+                        .andWhere('user_id', user_id);
+                    favorites.length !== 0
+                        ? (dish.favorite = true)
+                        : (dish.favorite = false);
                     return { ...dish, ingredients };
                 })
             );

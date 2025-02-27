@@ -6,6 +6,7 @@ const sessionsRouter = Router();
 const sessionsController = new SessionsController();
 
 sessionsRouter.post('/', sessionsController.create);
-sessionsRouter.get('/', ensureAuthenticated, sessionsController.delete);
+sessionsRouter.delete('/', ensureAuthenticated, sessionsController.delete);
+sessionsRouter.get('/verify', ensureAuthenticated, sessionsController.verify);
 
 module.exports = sessionsRouter;

@@ -69,7 +69,7 @@ class OrderItensService {
         }
 
         await this.orderItensRepository.delete(item_id);
-        return 'Item deleted';
+        return 0;
     }
 
     async update(item_id, quantity, amount) {

@@ -36,6 +36,10 @@ class SessionsController {
 
         return resp.status(200).json('Logout successfully');
     }
+
+    async verify(req, resp) {
+        return resp.status(200).json({ user: req.user });
+    }
 }
 
 module.exports = SessionsController;

@@ -34,8 +34,6 @@ class FavoritesController {
         const { dish_id } = req.params;
         const { id: user_id } = req.user;
 
-        console.log(dish_id, user_id);
-
         const favoritesDeleteService = new FavoritesDeleteService(
             repositories.favoriteRepository,
             repositories.dishRepository

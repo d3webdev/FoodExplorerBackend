@@ -55,7 +55,11 @@ class PaymentRepositories {
 
     async update(updateData) {
         try {
-            await knex('payment').where('id', updateData.id).update(updateData);
+            const updated = await knex('payment')
+                .where('id', updateData.id)
+                .update(updateData)
+                .returning('*');
+            return updated[0];
         } catch (error) {
             throw new Error(error, 500);
         }
