@@ -1,7 +1,10 @@
 node_modules
 eslint.config.mjs
 package-lock.json
-tmp/uploads/*
+tmp/uploads/*.png
+tmp/uploads/*.jpg
+tmp/uploads/*.jpeg
+tmp/uploads/*.gif
 src/database/database.db
 
 .env
