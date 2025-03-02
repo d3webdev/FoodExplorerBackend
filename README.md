@@ -156,4 +156,4 @@ Para testar a aplicação, você pode utilizar as seguintes credenciais:
 
 ## Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](Este projeto está sob a licença MIT. Veja o arquivo [https://github.com/csrprojects/FoodExplorerBackend/blob/main/LICENSE.md](LICENSE) para mais detalhes.) para mais detalhes.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/csrprojects/FoodExplorerBackend/blob/main/LICENSE.md) para mais detalhes.) para mais detalhes.
