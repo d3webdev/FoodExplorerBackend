@@ -17,6 +17,10 @@ class DishesUpdateService {
         category,
         ingredients,
     }) {
+        if (!id) {
+            throw new AppError('ID is required', 400);
+        }
+
         const checkDishExists = await this.dishesRepositories.findById(id);
 
         if (!checkDishExists) {

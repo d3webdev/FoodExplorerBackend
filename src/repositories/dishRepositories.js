@@ -21,27 +21,27 @@ class DishRepositories {
     async search(searchTerm) {
         try {
             const dishes = await knex('dishes')
-                .join(
-                    'dish_ingredients',
-                    'dishes.id',
-                    '=',
-                    'dish_ingredients.dish_id'
-                )
-                .select(
+                .select([
                     'dishes.id as id',
                     'dishes.name as dish_name',
                     'dishes.description as dish_description',
                     'dishes.image as image',
                     'dishes.price as dish_price',
                     'dishes.discount as dish_discount',
-                    'dishes.category as dish_category'
+                    'dishes.category as dish_category',
+                ])
+                .leftJoin(
+                    'dish_ingredients',
+                    'dishes.id',
+                    '=',
+                    'dish_ingredients.dish_id'
                 )
-                .where('dishes.name', 'like', `%${searchTerm}%`)
-                .orWhere('dish_ingredients.name', 'like', `%${searchTerm}%`)
-                .orWhere('dishes.description', 'like', `%${searchTerm}%`)
+                .whereLike('dishes.name', `%${searchTerm}%`)
+                .orWhereLike('dish_ingredients.name', `%${searchTerm}%`)
+                .orWhereLike('dishes.description', `%${searchTerm}%`)
                 .groupBy('dishes.id');
-
-            let allDishes = await Promise.allSettled(
+            console.log('DISHES', dishes);
+            let allDishes = await Promise.all(
                 dishes.map(async (dish) => {
                     const ingredients = await knex('dish_ingredients')
                         .select('id', 'name')

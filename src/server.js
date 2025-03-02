@@ -8,12 +8,18 @@ const uploadConfig = require('./configs/upload');
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 3000;
+const FRONTEND_URL = process.env.FRONTEND_URL;
+const FRONTEND_DEV_URL = process.env.FRONTEND_DEV_URL;
+const origins =
+    process.env.NODE_ENV === 'development'
+        ? [FRONTEND_URL, FRONTEND_DEV_URL]
+        : [FRONTEND_URL];
 
 const app = express();
 
 app.use(
     cors({
-        origin: ['http://localhost:3001', 'http://127.0.0.1:3001'],
+        origin: origins,
         credentials: true,
         preflightContinue: false,
         allowedHeaders: ['Content-Type', 'Authorization'],

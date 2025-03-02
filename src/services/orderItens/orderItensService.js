@@ -13,6 +13,15 @@ class OrderItensService {
             throw new AppError('Dish not found', 404);
         }
 
+        const order = await this.orderRepository.findById(order_id);
+        if (!order) {
+            throw new AppError('Order not found', 404);
+        }
+
+        if (order.status === 'completed' || order.status === 'canceled') {
+            throw new AppError('Order already finished', 400);
+        }
+
         const itemExists = await this.orderItensRepository.findItemByDishId(
             order_id,
             dish_id

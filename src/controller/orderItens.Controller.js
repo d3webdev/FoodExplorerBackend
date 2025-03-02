@@ -7,14 +7,7 @@ const OrderItensListService = require('../services/orderItens/orderItensListServ
 
 class OrderItensController {
     async create(req, res) {
-        //const { id: user_id } = req.user;
         const { order_id, dish_id, quantity } = req.body;
-
-        // const ordersCreateService = new OrdersCreateService(
-        //     repositories.orderRepository
-        // );
-
-        // const order = await ordersCreateService.execute(user_id);
 
         const orderItensService = new OrderItensService(
             repositories.orderItensRepository,

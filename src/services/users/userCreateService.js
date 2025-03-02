@@ -8,6 +8,7 @@ class UserCreateService {
 
     async execute({ name, email, password }) {
         const checkUserExists = await this.userRepository.findByEmail(email);
+        const checkFirst = await this.userRepository.getAll();
 
         if (checkUserExists) {
             throw new AppError('Email address already used.', 400);
@@ -19,13 +20,24 @@ class UserCreateService {
 
         const passwordHash = await hash(password, 8);
 
-        const response = await this.userRepository.createUser({
-            name,
-            email,
-            password: passwordHash,
-        });
+        if (checkFirst.length === 0) {
+            const response = await this.userRepository.createUser({
+                name,
+                email,
+                role: 'admin',
+                password: passwordHash,
+            });
+            return response;
+        } else {
+            const response = await this.userRepository.createUser({
+                name,
+                email,
+                role: 'customer',
+                password: passwordHash,
+            });
 
-        return response;
+            return response;
+        }
     }
 }
 

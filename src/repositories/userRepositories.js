@@ -14,6 +14,23 @@ class userRepositories {
         }
     }
 
+    async getAll() {
+        try {
+            const users = await knex('users').select(
+                'id',
+                'name',
+                'email',
+                'role',
+                'created_at',
+                'updated_at'
+            );
+
+            return users;
+        } catch (error) {
+            throw new Error(error, 500);
+        }
+    }
+
     async findAll(role) {
         try {
             const users = await knex('users')
@@ -58,11 +75,12 @@ class userRepositories {
         }
     }
 
-    async createUser({ name, email, password }) {
+    async createUser({ name, email, role, password }) {
         try {
             const userId = await knex('users').insert({
                 name,
                 email,
+                role,
                 password,
             });
 
