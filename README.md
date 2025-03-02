@@ -141,18 +141,7 @@ O esquema do banco de dados é gerenciado através das migrações do Knex.js en
 # Deploy
 O deploy da aplicação esta disponível no endereço:
 
-### Credenciais para teste
-
-Para testar a aplicação, você pode utilizar as seguintes credenciais:
-
-**Admin:**
-- Email: admin@foodexplorer.com
-- Senha: fplxAdmin001
-
-**Cliente:**
-- Email: cliente@email.com
-- Senha: fplxClient002
-
+---
 
 ## Licença
 
