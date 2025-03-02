@@ -24,8 +24,8 @@ O backend foi construído com Node.js e Express, utilizando SQLite para persist�
 
 1. Clone este repositório:
 ```sh
-git clone https://github.com/seu-usuario/food-explorer-backend.git
-cd food-explorer-backend
+git clone https://github.com/csrprojects/FoodExplorerBackend.git
+cd FoodExplorerBackend
 ```
 
 2. Instale as dependências:
