@@ -4,7 +4,6 @@ class DishesSearchService {
     }
 
     async execute(term) {
-        console.log('SEARCH', term);
         const response = await this.dishesRepositories.search(term);
         return response;
     }

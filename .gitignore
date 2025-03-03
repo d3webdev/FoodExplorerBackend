@@ -5,6 +5,11 @@ tmp/uploads/*.png
 tmp/uploads/*.jpg
 tmp/uploads/*.jpeg
 tmp/uploads/*.gif
+tmp/*.png
+tmp/*.jpg
+tmp/*.jpeg
+tmp/*.gif
+
 src/database/database.db
 
 .env

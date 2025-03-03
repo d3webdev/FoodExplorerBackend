@@ -40,7 +40,6 @@ class DishRepositories {
                 .orWhereLike('dish_ingredients.name', `%${searchTerm}%`)
                 .orWhereLike('dishes.description', `%${searchTerm}%`)
                 .groupBy('dishes.id');
-            console.log('DISHES', dishes);
             let allDishes = await Promise.all(
                 dishes.map(async (dish) => {
                     const ingredients = await knex('dish_ingredients')
@@ -66,11 +65,11 @@ class DishRepositories {
                 return response;
             }
 
-            await knex('dish_ingredients')
-                .where('dish_id', updateData.id)
-                .del();
-
             if (updateData.ingredients) {
+                await knex('dish_ingredients')
+                    .where('dish_id', updateData.id)
+                    .del();
+
                 const dishIngredients = updateData.ingredients.map(
                     (ingredient) => {
                         return {

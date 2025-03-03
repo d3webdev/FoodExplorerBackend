@@ -11,7 +11,6 @@ class DishesUpdateService {
         id,
         name,
         description,
-        image,
         price,
         discount,
         category,
@@ -33,16 +32,15 @@ class DishesUpdateService {
         };
         name && (updateData.name = name);
         description && (updateData.description = description);
-        image && (updateData.image = image);
         price && (updateData.price = price);
         discount && (updateData.discount = discount);
         category && (updateData.category = category);
         ingredients && (updateData.ingredients = ingredients);
 
-        if (!image && checkDishExists.image) {
-            await this.diskStorage.delete(checkDishExists.image);
-            updateData.image = null;
-        }
+        // if (!image && checkDishExists.image) {
+        //     await this.diskStorage.delete(checkDishExists.image);
+        //     updateData.image = null;
+        // }
 
         const response = await this.dishesRepositories.update(updateData);
 
