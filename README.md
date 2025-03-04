@@ -138,9 +138,6 @@ A aplicação utiliza SQLite com as seguintes tabelas principais:
 
 O esquema do banco de dados é gerenciado através das migrações do Knex.js encontradas em migrations.
 
-# Deploy
-O deploy da aplicação esta disponível no endereço:
-
 ---
 
 ## Licença
